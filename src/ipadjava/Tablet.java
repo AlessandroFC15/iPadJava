@@ -108,7 +108,7 @@ public abstract class Tablet extends Device {
 	protected boolean screenLocked;
 	protected boolean wiFiOn;
 	protected boolean mobileDataOn;
-	HashMap appsInstalled;
+	HashMap<String, Double> appsInstalled;
 	ArrayList<String> activeApps;
 
 }
