@@ -1,6 +1,6 @@
 package ipadjava;
 
-public class SamsungTablet extends Tablet {
+public class SamsungTablet extends Tablet implements Expandable {
 	private boolean externalSDCard;
 	private int sizeSDCard;
 
@@ -50,7 +50,7 @@ public class SamsungTablet extends Tablet {
 
 	}
 
-	public boolean insertSDCard() {
+	private boolean insertSDCard() {
 		if (!externalSDCard) {
 			int storage;
 			System.out.print("\n>> Enter the size of the SD Card in GB: ");
@@ -74,7 +74,7 @@ public class SamsungTablet extends Tablet {
 		}
 	}
 
-	public boolean removeSDCard() {
+	private boolean removeSDCard() {
 		if (externalSDCard) {
 			String choice;
 
@@ -112,7 +112,7 @@ public class SamsungTablet extends Tablet {
 		}
 	}
 
-	public boolean changeSDCard() {
+	private boolean changeSDCard() {
 		if (externalSDCard) {
 			float storage;
 			System.out
@@ -187,5 +187,20 @@ public class SamsungTablet extends Tablet {
 		showAppsInstalled();
 
 		return output;
+	}
+
+	@Override
+	public boolean increaseStorage() {
+		return insertSDCard();
+	}
+
+	@Override
+	public boolean removeExtraStorage() {
+		return removeSDCard();
+	}
+
+	@Override
+	public boolean changeExtraStorage() {
+		return changeSDCard();
 	}
 }

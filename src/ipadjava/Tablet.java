@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public abstract class Tablet extends Device {
+public abstract class Tablet extends Device implements InternetConnectable {
 
 	public static void main(String[] args) {
 		IPad ipad = new IPad();
@@ -356,8 +356,7 @@ public abstract class Tablet extends Device {
 		activeApps = new ArrayList<>();
 	}
 
-	private void installDefaultApps() {
-	}
+	private void installDefaultApps() {}
 
 	public String toString() {
 		return super.toString() + "\n>> STORAGE CAPACITY = " + storageCapacity
