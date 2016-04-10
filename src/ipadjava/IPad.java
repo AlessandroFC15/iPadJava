@@ -89,6 +89,7 @@ public class IPad extends Tablet {
 			System.out.print(">> Enter your choice: ");
 
 			choice = cin.nextInt();
+			cin.nextLine();
 
 			if (choice == 1) {
 				typeOfLockScreen = TOUCH_ID;
@@ -155,8 +156,6 @@ public class IPad extends Tablet {
 		String output = super.toString() + "\n>> iOS VERSION = "
 				+ latestIOSVersion + "\n>> TYPE OF LOCK SCREEN = "
 				+ (typeOfLockScreen == TOUCH_ID ? "TOUCH ID" : "PASSWORD");
-
-		showAppsInstalled();
 
 		return output;
 	}

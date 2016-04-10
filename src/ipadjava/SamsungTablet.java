@@ -5,7 +5,7 @@ public class SamsungTablet extends Tablet implements Expandable {
 	private int sizeSDCard;
 
 	SamsungTablet() {
-		System.out.println(".:. Samsung Tablet Creation .:.\n");
+		System.out.println(".:. Samsung Tablet Creation .:.");
 
 		externalSDCard = false;
 		sizeSDCard = 0;
@@ -62,7 +62,7 @@ public class SamsungTablet extends Tablet implements Expandable {
 			storageCapacity += sizeSDCard;
 			freeMemory += sizeSDCard;
 
-			System.out.println("|| SD Card successfully inserted ||\n");
+			System.out.println("\n|| SD Card successfully inserted ||\n");
 
 			return true;
 		} else {
@@ -183,8 +183,6 @@ public class SamsungTablet extends Tablet implements Expandable {
 		if (externalSDCard) {
 			output += "\n>> SIZE OF SD CARD: " + sizeSDCard + "GB";
 		}
-
-		showAppsInstalled();
 
 		return output;
 	}

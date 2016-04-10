@@ -43,6 +43,6 @@ public class Data {
 	// Overriding
 
 	public String toString() {
-		return ">> DATE OF CREATION = " + day + "/" + month + "/" + year;
+		return "\n>> DATE OF CREATION = " + day + "/" + month + "/" + year;
 	}
 }
