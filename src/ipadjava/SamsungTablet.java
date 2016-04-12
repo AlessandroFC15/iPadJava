@@ -201,4 +201,25 @@ public class SamsungTablet extends Tablet implements Expandable {
 	public boolean changeExtraStorage() {
 		return changeSDCard();
 	}
+	
+	// Implementação do outro método sobrecarregado de Authenticable
+	
+	public void setLockScreenPassword(String password) {
+		while (true) {
+			if ((password.length() >= 4) && (password.length() <= 32)) {
+				lockScreenPassword = password;
+				System.out
+						.println("\n|| Lock screen password set successfully ||");
+				break;
+			}
+
+			System.out
+					.println("\n# Password must be 4 to 32 chars. Try again. #\n");
+			
+			System.out
+			.print("\n>> Set initial password to lock screen (4-32 chars): ");
+
+			password = cin.nextLine();
+		}
+	}
 }
