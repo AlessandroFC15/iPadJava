@@ -1,10 +1,6 @@
 package ipadjava;
 
 public class IPad extends Tablet {
-	public static void main(String[] args) {
-		System.out.println("Hello World!");
-	}
-
 	IPad() {
 		System.out.println(".:. iPad Creation .:.\n");
 
@@ -54,22 +50,7 @@ public class IPad extends Tablet {
 		}
 	}
 
-	public boolean unlockScreen() {
-		// Check to see if the screen is indeed locked
-		if (!isScreenUnlocked()) {
-			// Depending of the type of lock screen selected,
-			// the procedures are different.
-			if (typeOfLockScreen == PASSWORD) {
-				return unlockPassword();
-			} else if (typeOfLockScreen == TOUCH_ID) {
-				return unlockTouchID();
-			}
-		}
-
-		System.out.println("\n| Screen was already unlocked. |\n");
-
-		return false;
-	}
+	
 
 	public static void updateIOSVersion() {
 		latestIOSVersion += 0.1;
@@ -158,6 +139,46 @@ public class IPad extends Tablet {
 				+ (typeOfLockScreen == TOUCH_ID ? "TOUCH ID" : "PASSWORD");
 
 		return output;
+	}
+	
+	// Implementação do outro método sobrecarregado de Authenticable
+	
+	public void setLockScreenPassword(String password) {
+		while (true) {
+			if ((password.length() >= 4) && (password.length() <= 32)) {
+				lockScreenPassword = password;
+				System.out
+						.println("\n|| Lock screen password set successfully ||");
+				break;
+			}
+
+			System.out
+					.println("\n# Password must be 4 to 32 chars. Try again. #\n");
+			
+			System.out
+			.print("\n>> Set initial password to lock screen (4-32 chars): ");
+
+			password = cin.nextLine();
+		}
+	}
+	
+	// Sobrescrita do "método qualquer"
+	
+	public boolean unlockScreen() {
+		// Check to see if the screen is indeed locked
+		if (!isScreenUnlocked()) {
+			// Depending of the type of lock screen selected,
+			// the procedures are different.
+			if (typeOfLockScreen == PASSWORD) {
+				return unlockPassword();
+			} else if (typeOfLockScreen == TOUCH_ID) {
+				return unlockTouchID();
+			}
+		}
+
+		System.out.println("\n| Screen was already unlocked. |\n");
+
+		return false;
 	}
 
 	// ATTRIBUTES
