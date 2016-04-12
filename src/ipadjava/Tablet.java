@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public abstract class Tablet extends Device implements InternetConnectable {
+public abstract class Tablet extends Device implements InternetConnectable, Authenticable {
 
 	public static final int IPAD = 0;
 	public static final int SAMSUNG = 1;
@@ -205,55 +205,7 @@ public abstract class Tablet extends Device implements InternetConnectable {
 			return false;
 		}
 	}
-
-	public boolean unlockScreen() {
-
-		if (!isScreenUnlocked()) {
-			String password;
-			while (true) {
-				System.out
-						.print("\n>> Enter password to unlock screen (0 to Quit): ");
-
-				password = cin.nextLine();
-
-				if (password.equals("0")) {
-					System.out
-							.println("|| Unlock process was cancelled. iPad remains locked. ||\n");
-					return false;
-				} else if ((password.length() >= 4) & (password.length() <= 32)) {
-					if (password.equals(lockScreenPassword)) {
-						screenLocked = false;
-						System.out.println("\n|| Screen is now unlocked ||\n");
-						return true;
-					} else {
-						System.out.println("\n# Wrong password. Try again #\n");
-					}
-				} else {
-					System.out
-							.println("\n# Password must be 4 to 32 chars. Try again #\n");
-				}
-			}
-		}
-
-		System.out.println("\n| Screen was already unlocked. |\n");
-		return false;
-	}
-
-	public boolean lockScreen() {
-		// Check to see if the screen is indeed unlocked.
-		if (isScreenUnlocked()) {
-			screenLocked = true;
-			System.out.println("\n|| Screen is now locked ||\n");
-			return true;
-		} else {
-			System.out.println("\n| Screen was already locked. |\n");
-			return false;
-		}
-	}
-
-	public boolean isScreenUnlocked() {
-		return !screenLocked;
-	}
+	
 
 	public void turnWiFiOn() {
 		if (wiFiOn) {
@@ -321,26 +273,6 @@ public abstract class Tablet extends Device implements InternetConnectable {
 		return value;
 	};
 
-	protected void setLockScreenPassword() {
-		String password;
-		while (true) {
-			System.out
-					.print("\n>> Set initial password to lock screen (4-32 chars): ");
-
-			password = cin.nextLine();
-
-			if ((password.length() >= 4) && (password.length() <= 32)) {
-				lockScreenPassword = password;
-				System.out
-						.println("\n|| Lock screen password set successfully ||");
-				break;
-			}
-
-			System.out
-					.println("\n# Password must be 4 to 32 chars. Try again. #\n");
-		}
-	}
-
 	protected boolean isAppInstalled(String name) {
 		// Find the app in the unordered map appsInstalled.
 		return appsInstalled.containsKey(name);
@@ -370,6 +302,82 @@ public abstract class Tablet extends Device implements InternetConnectable {
 				+ "\n>> NUM OF ACTIVE APPS = " + activeApps.size()
 				+ "\n>> SCREEN LOCKED = " + (screenLocked ? "YES" : "NO");
 	}
+	
+	// Implementação de método sobrecarregado da interface Authenticable
+	
+	public void setLockScreenPassword() {
+		String password;
+		while (true) {
+			System.out
+					.print("\n>> Set initial password to lock screen (4-32 chars): ");
+
+			password = cin.nextLine();
+
+			if ((password.length() >= 4) && (password.length() <= 32)) {
+				lockScreenPassword = password;
+				System.out
+						.println("\n|| Lock screen password set successfully ||");
+				break;
+			}
+
+			System.out
+					.println("\n# Password must be 4 to 32 chars. Try again. #\n");
+		}
+	}
+	
+	// Implementação de métodos da interface Authenticable
+	
+	public boolean unlockScreen() {
+
+		if (!isScreenUnlocked()) {
+			String password;
+			while (true) {
+				System.out
+						.print("\n>> Enter password to unlock screen (0 to Quit): ");
+
+				password = cin.nextLine();
+
+				if (password.equals("0")) {
+					System.out
+							.println("|| Unlock process was cancelled. iPad remains locked. ||\n");
+					return false;
+				} else if ((password.length() >= 4) & (password.length() <= 32)) {
+					if (password.equals(lockScreenPassword)) {
+						screenLocked = false;
+						System.out.println("\n|| Screen is now unlocked ||\n");
+						return true;
+					} else {
+						System.out.println("\n# Wrong password. Try again #\n");
+					}
+				} else {
+					System.out
+							.println("\n# Password must be 4 to 32 chars. Try again #\n");
+				}
+			}
+		}
+
+		System.out.println("\n| Screen was already unlocked. |\n");
+		return false;
+	}
+	
+	public boolean lockScreen() {
+		// Check to see if the screen is indeed unlocked.
+		if (isScreenUnlocked()) {
+			screenLocked = true;
+			System.out.println("\n|| Screen is now locked ||\n");
+			return true;
+		} else {
+			System.out.println("\n| Screen was already locked. |\n");
+			return false;
+		}
+	}
+	
+	public boolean isScreenUnlocked() {
+		return !screenLocked;
+	}
+	
+	
+	// Functions related to the menu
 	
 	private static void menu(Tablet tablet)
 	{
