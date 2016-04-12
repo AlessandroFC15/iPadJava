@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public abstract class Tablet extends Device implements InternetConnectable, Authenticable {
+public abstract class Tablet extends Device implements InternetConnectable, Lockable {
 
 	public static final int IPAD = 0;
 	public static final int SAMSUNG = 1;
