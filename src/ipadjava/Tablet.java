@@ -303,32 +303,27 @@ public abstract class Tablet extends Device implements InternetConnectable, Lock
 				+ "\n>> SCREEN LOCKED = " + (screenLocked ? "YES" : "NO");
 	}
 	
-	// Implementação de método sobrecarregado da interface Authenticable
+	// Implementação de método sobrecarregado da interface Lockable
 	
 	public void setLockScreenPassword() {
 		String password;
 		while (true) {
-			System.out
-					.print("\n>> Set initial password to lock screen (4-32 chars): ");
-
+			System.out.print("\n>> Set initial password to lock screen (4-32 chars): ");
 			password = cin.nextLine();
 
 			if ((password.length() >= 4) && (password.length() <= 32)) {
 				lockScreenPassword = password;
-				System.out
-						.println("\n|| Lock screen password set successfully ||");
+				System.out.println("\n|| Lock screen password set successfully ||");
 				break;
 			}
 
-			System.out
-					.println("\n# Password must be 4 to 32 chars. Try again. #\n");
+			System.out.println("\n# Password must be 4 to 32 chars. Try again. #\n");
 		}
 	}
 	
-	// Implementação de métodos da interface Authenticable
+	// Implementação de métodos da interface Lockable
 	
 	public boolean unlockScreen() {
-
 		if (!isScreenUnlocked()) {
 			String password;
 			while (true) {

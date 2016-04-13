@@ -13,3 +13,4 @@ public interface InternetConnectable {
 	public boolean isInternetAvailable();
 	
 }
+

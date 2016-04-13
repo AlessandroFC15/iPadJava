@@ -15,3 +15,4 @@ public interface Lockable {
 	public void setLockScreenPassword(String password);
 
 }
+

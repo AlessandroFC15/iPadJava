@@ -141,7 +141,7 @@ public class IPad extends Tablet {
 		return output;
 	}
 	
-	// Implementação do outro método sobrecarregado de Authenticable
+	// Implementação do outro método sobrecarregado de Lockable
 	
 	public void setLockScreenPassword(String password) {
 		while (true) {
