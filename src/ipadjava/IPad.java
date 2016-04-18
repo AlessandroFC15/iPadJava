@@ -86,7 +86,7 @@ public class IPad extends Tablet {
 		}
 	}
 
-	private void setTouchID() {
+	public void setTouchID() {
 		touchID.addFingerPrint();
 	}
 
