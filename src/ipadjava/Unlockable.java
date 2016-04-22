@@ -1,8 +1,10 @@
 package ipadjava;
 
-public interface Lockable {
+public interface Unlockable {
 	
 	public boolean unlockScreen();
+	
+	public boolean unlockScreen(String password);
 	
 	public boolean lockScreen();
 	
@@ -12,7 +14,7 @@ public interface Lockable {
 	
 	public void setLockScreenPassword();
 	
-	public void setLockScreenPassword(String password);
+	public void setLockScreenPassword(final String password);
 
 }
 

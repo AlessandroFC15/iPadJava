@@ -3,40 +3,40 @@ package ipadjava;
 public class IPad extends Tablet {
 	IPad() {
 		System.out.println(".:. iPad Creation .:.\n");
-
+	
 		touchID = new TouchID();
-
+	
 		installDefaultApps();
-
+	
 		openDefaultApps();
-
+	
 		setInitialSecuritySystem();
-
+	
 		numberOfiPads++;
 	}
-
+	
 	IPad(int storage) {
 		super(storage);
-
+	
 		System.out.println(".:. iPad Creation .:.\n");
-
+	
 		touchID = new TouchID();
-
+	
 		installDefaultApps();
-
+	
 		openDefaultApps();
-
+	
 		setInitialSecuritySystem();
-
+	
 		numberOfiPads++;
 	}
-
+	
 	IPad(IPad oldIPad) {
 		super(oldIPad);
-
+	
 		typeOfLockScreen = oldIPad.typeOfLockScreen;
 		touchID = new TouchID(oldIPad.touchID);
-
+	
 		numberOfiPads++;
 	}
 
@@ -175,9 +175,9 @@ public class IPad extends Tablet {
 				return unlockTouchID();
 			}
 		}
-
+	
 		System.out.println("\n| Screen was already unlocked. |\n");
-
+	
 		return false;
 	}
 

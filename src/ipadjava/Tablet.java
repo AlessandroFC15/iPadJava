@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public abstract class Tablet extends Device implements InternetConnectable, Lockable {
+public abstract class Tablet extends Device implements InternetConnectable, Unlockable {
 
-	
-	
 	public static void main(String[] args) {
 		Tablet iPad = new IPad();
 
@@ -29,9 +27,9 @@ public abstract class Tablet extends Device implements InternetConnectable, Lock
 
 	Tablet(int storage) {
 		setSpecsToDefault();
-
+	
 		storageCapacity = validateValue(storage, 1, 128, "storage capacity");
-
+	
 		freeMemory = storageCapacity;
 	}
 
@@ -326,9 +324,9 @@ public abstract class Tablet extends Device implements InternetConnectable, Lock
 			while (true) {
 				System.out
 						.print("\n>> Enter password to unlock screen (0 to Quit): ");
-
+	
 				password = cin.nextLine();
-
+	
 				if (password.equals("0")) {
 					System.out
 							.println("|| Unlock process was cancelled. iPad remains locked. ||\n");
@@ -345,6 +343,37 @@ public abstract class Tablet extends Device implements InternetConnectable, Lock
 					System.out
 							.println("\n# Password must be 4 to 32 chars. Try again #\n");
 				}
+			}
+		}
+	
+		System.out.println("\n| Screen was already unlocked. |\n");
+		return false;
+	}
+	
+	public boolean unlockScreen(String password) {
+		if (!isScreenUnlocked()) {
+			while (true) {
+				if (password.equals("0")) {
+					System.out
+							.println("|| Unlock process was cancelled. iPad remains locked. ||\n");
+					return false;
+				} else if ((password.length() >= 4) & (password.length() <= 32)) {
+					if (password.equals(lockScreenPassword)) {
+						screenLocked = false;
+						System.out.println("\n|| Screen is now unlocked ||\n");
+						return true;
+					} else {
+						System.out.println("\n# Wrong password. Try again #\n");
+					}
+				} else {
+					System.out
+							.println("\n# Password must be 4 to 32 chars. Try again #\n");
+				}
+				
+				System.out
+				.print("\n>> Enter password to unlock screen (0 to Quit): ");
+
+				password = cin.nextLine();
 			}
 		}
 

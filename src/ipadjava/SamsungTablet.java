@@ -6,35 +6,50 @@ public class SamsungTablet extends Tablet implements Expandable {
 
 	SamsungTablet() {
 		System.out.println(".:. Samsung Tablet Creation .:.");
-
+	
 		externalSDCard = false;
 		sizeSDCard = 0;
-
+	
 		installDefaultApps();
-
+	
 		openDefaultApps();
-
+	
 		setLockScreenPassword();
 	}
-
+	
 	SamsungTablet(int storage) {
 		super(storage);
-
+	
 		System.out.println(".:. Samsung Tablet Creation .:.\n");
-
+	
 		externalSDCard = false;
 		sizeSDCard = 0;
-
+	
 		installDefaultApps();
-
+	
 		openDefaultApps();
-
+	
+		setLockScreenPassword();
+	}
+	
+	SamsungTablet(int storage, int externalSDCard)
+	{
+		super(storage);
+	
+		System.out.println(".:. Samsung Tablet Creation .:.\n");
+	
+		insertSDCard(externalSDCard);
+	
+		installDefaultApps();
+	
+		openDefaultApps();
+	
 		setLockScreenPassword();
 	}
 
 	SamsungTablet(SamsungTablet oldTablet) {
 		super(oldTablet);
-
+	
 		externalSDCard = oldTablet.externalSDCard;
 		sizeSDCard = oldTablet.sizeSDCard;
 	}
@@ -53,9 +68,42 @@ public class SamsungTablet extends Tablet implements Expandable {
 	private boolean insertSDCard() {
 		if (!externalSDCard) {
 			int storage;
-			System.out.print("\n>> Enter the size of the SD Card in GB: ");
-			storage = cin.nextInt();
+			String inputStorage;
+			
+			while (true)
+			{
+				System.out.print("\n>> Enter the size of the SD Card in GB: ");
+				inputStorage = cin.next();
+				
+				try {
+					storage = Integer.parseInt(inputStorage);
+					break;
+				} catch (NumberFormatException e)
+				{
+					System.out.println("\n# Enter a valid number #");
+				}
+			}
+			
+			sizeSDCard = (int) validateValue(storage, 2, 128, "SD card size");
 
+			externalSDCard = true;
+			storageCapacity += sizeSDCard;
+			freeMemory += sizeSDCard;
+
+			System.out.println("\n|| SD Card successfully inserted ||\n");
+
+			return true;
+		} else {
+			System.out
+					.println("# There is already a SD card inserted in the tablet. #\n"
+							+ "\n# Remove it first and try again! #\n");
+
+			return false;
+		}
+	}
+	
+	private boolean insertSDCard(int storage) {
+		if (!externalSDCard) {
 			sizeSDCard = (int) validateValue(storage, 2, 128, "SD card size");
 
 			externalSDCard = true;
@@ -221,5 +269,10 @@ public class SamsungTablet extends Tablet implements Expandable {
 
 			password = cin.nextLine();
 		}
+	}
+
+	@Override
+	public boolean increaseStorage(int size) {
+		return insertSDCard(size);
 	}
 }

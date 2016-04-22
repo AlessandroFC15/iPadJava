@@ -5,17 +5,34 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class MainClass {
-	public static final int IPAD = 0;
-	public static final int SAMSUNG = 1;
+	
+	public enum TypeOfTablet{
+		IPAD("iPad"), SAMSUNG("Samsung Tablet");
+		
+		private String name;
+		
+		TypeOfTablet(String name)
+		{
+			this.name = name;
+		}
+		
+		public String getName()
+		{
+			return name;
+		}
+	}
 	
 	public static void main(String[] args) {
 		ArrayList<Tablet> tablets = new ArrayList<>();
 		
 		tablets.add(new IPad());
+		
+		// Método setLockScreenPassword será chamado nessa criação
 		tablets.add(new SamsungTablet());
 		
 		for (Tablet tablet : tablets)
 		{
+			// Testando método sobrescrito em IPad
 			tablet.unlockScreen();
 			
 			if (tablet instanceof IPad)
@@ -32,14 +49,14 @@ public class MainClass {
 	
 		private static void menu(Tablet tablet)
 		{
-		    int typeOfObject;
+		    TypeOfTablet typeOfObject;
 		    
 		    if (tablet instanceof IPad)
 		    {
-		        typeOfObject = IPAD;
+		        typeOfObject = TypeOfTablet.IPAD;
 		    } else if (tablet instanceof SamsungTablet)
 		    {
-		        typeOfObject = SAMSUNG;
+		        typeOfObject = TypeOfTablet.SAMSUNG;
 		    } else
 		    {
 		        return;
@@ -51,12 +68,12 @@ public class MainClass {
 		    do {
 		    	// The options will change accordingly to the type of object.
 		        
-		        System.out.print("\n\t\t|| " + (typeOfObject == IPAD? "iPad" : "Samsung") + " Control Center ||\n"
+		        System.out.print("\n\t\t|| " + typeOfObject.getName() + " Control Center ||\n"
 		        + "\n1 => Show Open Apps"
 		        + "\t\t2 => Install App"
 		        + "\n\n3 => Uninstall App"
 		        + "\t\t4 => Show Apps Installed"
-		        + "\n\n5 => Get " + (typeOfObject == IPAD? "iPad" : "Samsung") + " Specs"
+		        + "\n\n5 => Get " + typeOfObject.getName() + " Specs"
 		        + "\t\t6 => Open App"
 		        + "\n\n7 => Close App"
 		        + "\t\t\t8 => Close All Apps"
@@ -69,9 +86,9 @@ public class MainClass {
 		        + "\n\n15 => Lock Screen"
 		        + "\t\t16 => Turn On"
 		        + "\n\n17 => Turn Off"
-		        + "\t\t\t18 => " + (typeOfObject == IPAD? "Get Number of iPads Created" : "Insert SD Card")
-		        + "\n\n19 => " + (typeOfObject == IPAD? "Update iOS Version" : "Remove SD Card")
-		        + (typeOfObject == SAMSUNG? "\t\t20 => Change SD Card\n\n" : "\t")
+		        + "\t\t\t18 => " + (typeOfObject == TypeOfTablet.IPAD? "Get Number of iPads Created" : "Insert SD Card")
+		        + "\n\n19 => " + (typeOfObject == TypeOfTablet.IPAD? "Update iOS Version" : "Remove SD Card")
+		        + (typeOfObject == TypeOfTablet.SAMSUNG? "\t\t20 => Change SD Card\n\n" : "\t")
 		        + "-1 => Quit\n");
 		        
 		        while (true)
@@ -187,7 +204,7 @@ public class MainClass {
 		                    tablet.turnOff();
 		                    break;
 		                case 18:
-		                    if (typeOfObject == IPAD)
+		                    if (typeOfObject == TypeOfTablet.IPAD)
 		                    {
 		                        System.out.println(">> NUMBER OF IPADS = " + IPad.getNumberOfiPads());
 		                    } else
@@ -197,7 +214,7 @@ public class MainClass {
 		                    
 		                    break;
 		                case 19:
-		                    if (typeOfObject == IPAD)
+		                    if (typeOfObject == TypeOfTablet.IPAD)
 		                    {
 		                        IPad.updateIOSVersion();
 		                       System.out.println(">> IOS Version update for all iPads. ");
@@ -208,7 +225,7 @@ public class MainClass {
 		                    
 		                    break;
 		                case 20:
-		                    if (typeOfObject == IPAD)
+		                    if (typeOfObject == TypeOfTablet.IPAD)
 		                    {
 		                        System.out.println("\n# Invalid option. Try again.");
 		                    } else
@@ -293,20 +310,26 @@ public class MainClass {
 		                System.out.println("# Invalid name. Try again.");
 		            }
 		            
-		            // Validate the size of the app.
-		            while (true)
-		            {
-		                System.out.print("\n\n>> Enter size of app in MB: ");
-		                sizeOfApp = cin.nextFloat();
-		                cin.nextLine();
-		                
-		                if (sizeOfApp > 0)
-		                {
-		                    break;
-		                }
-		                
-		                System.out.println("\n# Invalid size. Try again.");
-		            }
+					// Validate the size of the app.
+					while (true)
+					{
+					    System.out.print("\n\n>> Enter size of app in MB: ");
+					    String inputSizeOfApp = cin.nextLine();
+					    
+					    try {
+					    	sizeOfApp = Float.parseFloat(inputSizeOfApp);
+					    	
+					    	if (sizeOfApp > 0)
+					        {
+					            break;
+					        }
+					        
+					        System.out.println("\n# Invalid size. Try again.");
+					    } catch (NumberFormatException e)
+					    {
+					    	System.out.println("\n# Enter a valid number #");
+					    }
+					}
 		                
 		            tablet.installApp(nameOfApp, sizeOfApp);
 		            
