@@ -47,7 +47,7 @@ public class SamsungTablet extends Tablet implements Expandable {
 		setLockScreenPassword();
 	}
 
-	SamsungTablet(SamsungTablet oldTablet) {
+	SamsungTablet(final SamsungTablet oldTablet) {
 		super(oldTablet);
 	
 		externalSDCard = oldTablet.externalSDCard;

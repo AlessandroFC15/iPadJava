@@ -33,7 +33,7 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		freeMemory = storageCapacity;
 	}
 
-	Tablet(Tablet oldTablet) {
+	Tablet(final Tablet oldTablet) {
 		super(oldTablet);
 
 		storageCapacity = oldTablet.storageCapacity;
@@ -46,7 +46,7 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		activeApps = new ArrayList<>(oldTablet.activeApps);
 	}
 
-	public boolean installApp(String name, double size) {
+	public boolean installApp(final String name, double size) {
 		// Check to see if the app isn't already installed
 		if (!isAppInstalled(name)) {
 			// Proceed to check if there is enough space to install the app
@@ -73,7 +73,7 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		}
 	}
 
-	public boolean uninstallApp(String name) {
+	public boolean uninstallApp(final String name) {
 		// Check to see if the app is indeed installed
 		if (isAppInstalled(name)) {
 			System.out.println("|| Uninstalling " + name + "... ||\n");
@@ -98,7 +98,7 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		}
 	}
 
-	public boolean openApp(String name) {
+	public boolean openApp(final String name) {
 		// Check to see if the app is installed
 		if (isAppInstalled(name)) {
 			// Check to see if the app isn't already open
@@ -119,7 +119,7 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		}
 	}
 
-	public boolean closeApp(String name) {
+	public boolean closeApp(final String name) {
 		// Check to see if the app is installed.
 		if (isAppInstalled(name)) {
 			// Check to see if the app is open.
@@ -252,7 +252,7 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		return !activeApps.isEmpty();
 	}
 
-	protected float validateValue(float value, float min, float max, String name) {
+	protected float validateValue(float value, float min, float max, final String name) {
 		while (true) {
 			if (value >= min && value <= max) {
 				break;
@@ -268,12 +268,12 @@ public abstract class Tablet extends Device implements InternetConnectable, Unlo
 		return value;
 	};
 
-	protected boolean isAppInstalled(String name) {
+	protected boolean isAppInstalled(final String name) {
 		// Find the app in the unordered map appsInstalled.
 		return appsInstalled.containsKey(name);
 	}
 
-	private boolean isAppOpen(String name) {
+	private boolean isAppOpen(final String name) {
 		return activeApps.contains(name);
 	}
 

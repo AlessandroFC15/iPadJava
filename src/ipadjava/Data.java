@@ -11,7 +11,7 @@ public class Data {
 		this.year = year;
 	}
 
-	Data(Data oldData) {
+	Data(final Data oldData) {
 		day = oldData.day;
 		month = oldData.month;
 		year = oldData.year;

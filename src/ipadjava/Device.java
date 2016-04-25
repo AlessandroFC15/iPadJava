@@ -14,7 +14,7 @@ public abstract class Device {
 		InitialDate = new Data(10, 04, 2016);
 	}
 
-	Device(Device device) {
+	Device(final Device device) {
 		isTurnedOn = device.isTurnedOn;
 		InitialDate = new Data(device.InitialDate);
 	}

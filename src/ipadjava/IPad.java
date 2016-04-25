@@ -31,7 +31,7 @@ public class IPad extends Tablet {
 		numberOfiPads++;
 	}
 	
-	IPad(IPad oldIPad) {
+	IPad(final IPad oldIPad) {
 		super(oldIPad);
 	
 		typeOfLockScreen = oldIPad.typeOfLockScreen;

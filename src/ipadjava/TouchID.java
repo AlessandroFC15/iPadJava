@@ -11,7 +11,7 @@ public class TouchID {
 		registeredFingerprints = new HashMap<>();
 	}
 
-	TouchID(TouchID oldTouchID) {
+	TouchID(final TouchID oldTouchID) {
 		registeredFingerprints = new HashMap<>(
 				oldTouchID.registeredFingerprints);
 	}
@@ -159,7 +159,7 @@ public class TouchID {
 		return !registeredFingerprints.isEmpty();
 	}
 
-	private boolean checkForFingerPrint(String name) {
+	private boolean checkForFingerPrint(final String name) {
 		return registeredFingerprints.containsKey(name);
 	}
 
